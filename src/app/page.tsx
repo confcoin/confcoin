@@ -1,3 +1,5 @@
+'use client';
+
 import { SupplyCard } from "@/components/Cards";
 import { BuyButton } from "@/components/Buttons";
 import { useEffect, useState } from "react";
