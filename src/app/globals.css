@@ -36,7 +36,7 @@
 }
 
 .card-hover {
-  @apply transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-primary/20;
+  @apply transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-pink-500/30;
 }
 
 .animated-gradient {
