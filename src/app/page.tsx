@@ -1,67 +1,136 @@
 import { SupplyCard } from "@/components/Cards";
 import { BuyButton } from "@/components/Buttons";
+import { useEffect, useState } from "react";
 
 export default function Home() {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const slides = [
+    { title: "Future of Finance", image: "/crypto1.jpg" },
+    { title: "Secure Transactions", image: "/crypto2.jpg" },
+    { title: "Global Community", image: "/crypto3.jpg" }
+  ];
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % slides.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, []);
+
   return (
     <div id="top" className="min-h-screen">
+      {/* Hero Section with Slider */}
       <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 animated-gradient opacity-20"></div>
-        <div className="relative z-10 text-center max-w-4xl mx-auto px-4">
-          <h1 className="text-6xl md:text-8xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-primary via-secondary to-accent">
-            CONFCOIN
-          </h1>
-          <p className="text-xl md:text-2xl mb-8 glass p-6 rounded-2xl">
-            A decentralized cryptocurrency ensuring transparency, security, and accountability through blockchain.
-          </p>
-          <BuyButton />
-        </div>
-      </section>
-
-      <section id="movement" className="relative py-20 px-4">
-        <div className="max-w-4xl mx-auto">
-          <div className="glass rounded-3xl p-8 md:p-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-center bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">
-              Join the Movement
-            </h2>
-            <p className="text-lg md:text-xl text-center">
-              By supporting CONFCOIN, you are contributing to a more inclusive and accepting world.
+        <div className="relative z-10 text-center max-w-6xl mx-auto px-4">
+          <div className="floating mb-12">
+            <h1 className="text-7xl md:text-9xl font-bold mb-6 rainbow-text">
+              CONFCOIN
+            </h1>
+            <p className="text-2xl md:text-3xl glass-morphism p-8 rounded-3xl">
+              A decentralized cryptocurrency ensuring transparency, security, and accountability through blockchain.
             </p>
+          </div>
+          
+          {/* Floating Cards Carousel */}
+          <div className="relative h-64 mt-16">
+            {slides.map((slide, index) => (
+              <div
+                key={index}
+                className={`absolute inset-0 transition-all duration-700 card-3d glass-morphism rounded-2xl p-6 
+                  ${index === currentSlide ? 'opacity-100 transform-none' : 
+                    'opacity-0 translate-x-full'}`}
+              >
+                <h3 className="text-2xl font-bold mb-4">{slide.title}</h3>
+                {/* Add image here if you have them */}
+              </div>
+            ))}
+          </div>
+          
+          <div className="mt-12">
+            <BuyButton />
           </div>
         </div>
       </section>
 
-      <section id="supply" className="relative py-20 px-4">
+      {/* Features Grid */}
+      <section className="relative py-20 px-4">
+        <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-8">
+          {[
+            { title: "Security First", icon: "🛡️" },
+            { title: "Lightning Fast", icon: "⚡" },
+            { title: "Global Access", icon: "🌍" },
+            { title: "Smart Contracts", icon: "📜" },
+            { title: "Low Fees", icon: "💎" },
+            { title: "24/7 Trading", icon: "🔄" }
+          ].map((feature) => (
+            <div key={feature.title} 
+                 className="glass-morphism gradient-border rounded-2xl p-6 card-3d">
+              <div className="text-4xl mb-4">{feature.icon}</div>
+              <h3 className="text-xl font-bold">{feature.title}</h3>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Supply Section with Enhanced Card */}
+      <section id="supply" className="relative py-20 px-4 overflow-hidden">
+        <div className="absolute inset-0 animated-gradient opacity-10"></div>
         <SupplyCard />
       </section>
 
+      {/* Get Involved Section */}
       <section id="get-involved" className="relative py-20 px-4">
-        <div className="max-w-4xl mx-auto">
-          <div className="glass rounded-3xl p-8 md:p-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-center bg-clip-text text-transparent bg-gradient-to-r from-secondary to-accent">
-              Get Involved
+        <div className="max-w-6xl mx-auto">
+          <div className="glass-morphism rounded-3xl p-12">
+            <h2 className="text-4xl md:text-5xl font-bold mb-12 text-center rainbow-text">
+              Join Our Ecosystem
             </h2>
-            <div className="grid md:grid-cols-3 gap-6">
+            <div className="grid md:grid-cols-3 gap-8">
               {[
                 {
-                  title: "Buy CONFCOIN",
-                  description: "Purchase through our website or authorized exchanges"
+                  title: "Trade",
+                  description: "Buy and sell CONFCOIN on major exchanges",
+                  icon: "💱"
                 },
                 {
-                  title: "Stay Updated",
-                  description: "Follow our social media channels for the latest news"
+                  title: "Stake",
+                  description: "Earn rewards by staking your tokens",
+                  icon: "🏦"
                 },
                 {
-                  title: "Spread the Word",
-                  description: "Share CONFCOIN with your network"
+                  title: "Build",
+                  description: "Develop on our platform",
+                  icon: "🛠️"
                 }
               ].map((item) => (
-                <div key={item.title} className="glass card-hover rounded-xl p-6">
-                  <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
+                <div key={item.title} 
+                     className="glass-morphism gradient-border rounded-xl p-8 card-3d text-center">
+                  <div className="text-4xl mb-4">{item.icon}</div>
+                  <h3 className="text-xl font-bold mb-2">{item.title}</h3>
                   <p className="text-sm opacity-80">{item.description}</p>
                 </div>
               ))}
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Statistics Section */}
+      <section className="relative py-20 px-4 overflow-hidden">
+        <div className="max-w-6xl mx-auto grid md:grid-cols-4 gap-8">
+          {[
+            { value: "100K+", label: "HOLDERS" },
+            { value: "$50M+", label: "MARKET CAP" },
+            { value: "24/7", label: "SUPPORT" },
+            { value: "0.001s", label: "LATENCY" }
+          ].map((stat) => (
+            <div key={stat.label} 
+                 className="glass-morphism rounded-xl p-6 text-center floating">
+              <div className="text-3xl font-bold rainbow-text">{stat.value}</div>
+              <div className="text-sm mt-2">{stat.label}</div>
+            </div>
+          ))}
         </div>
       </section>
     </div>
