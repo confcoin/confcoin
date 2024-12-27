@@ -3,9 +3,11 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-  --accent: #ec407a;
+  --background: #0f172a;
+  --foreground: #f8fafc;
+  --primary: #ec4899;
+  --secondary: #8b5cf6;
+  --accent: #06b6d4;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -15,8 +17,30 @@
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+@layer base {
+  body {
+    @apply min-h-screen bg-gradient-to-br from-background via-gray-900 to-black;
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+  }
+}
+
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.glass {
+  @apply backdrop-blur-md bg-white/10 border border-white/20;
+}
+
+.card-hover {
+  @apply transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-primary/20;
+}
+
+.animated-gradient {
+  background: linear-gradient(-45deg, var(--primary), var(--secondary), var(--accent));
+  background-size: 200% 200%;
+  animation: gradient 15s ease infinite;
 }

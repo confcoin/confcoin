@@ -2,25 +2,27 @@ import Link from "next/link";
 
 export default function Navbar() {
   return (
-    <nav className="flex justify-between items-center p-4 shadow-md bg-white dark:bg-[#111]">
-      <div className="font-bold text-xl">CONFCOIN</div>
-      <ul className="flex gap-4">
-        <li>
-          <a href="#hero" className="hover:underline">Home</a>
-        </li>
-        <li>
-          <a href="#movement" className="hover:underline">Movement</a>
-        </li>
-        <li>
-          <a href="#supply" className="hover:underline">Supply</a>
-        </li>
-        <li>
-          <a href="#get-involved" className="hover:underline">Get Involved</a>
-        </li>
-        <li>
-          <a href="#top" className="hover:underline">Top</a>
-        </li>
-      </ul>
+    <nav className="fixed w-full z-50 top-0 glass">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16">
+          <div className="font-bold text-xl bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">
+            CONFCOIN
+          </div>
+          <div className="hidden md:block">
+            <div className="flex items-center space-x-8">
+              {['Home', 'Movement', 'Supply', 'Get Involved'].map((item) => (
+                <a
+                  key={item}
+                  href={`#${item.toLowerCase().replace(' ', '-')}`}
+                  className="text-sm font-medium hover:text-primary transition-colors duration-300"
+                >
+                  {item}
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
     </nav>
   );
 }
